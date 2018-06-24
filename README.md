@@ -3,9 +3,9 @@
 ServerStatus is a full rewrite of [mojeda's](https://github.com/mojeda) [ServerStatus](https://github.com/mojeda/ServerStatus) script, which in turn is a modified version of [BlueVM's](http://www.lowendtalk.com/discussion/comment/169690#Comment_169690) script.
 
 ### Based on:
-https://github.com/BotoX/ServerStatus
-https://github.com/cppla/ServerStatus
-https://github.com/ToyoDAdoubi/ServerStatus-Toyo
+[BotoX-ServerStatus](https://github.com/BotoX/ServerStatus)
+[cppla-ServerStatus](https://github.com/cppla/ServerStatus)
+[ToyoDAdoubi-ServerStatus](https://github.com/ToyoDAdoubi/ServerStatus-Toyo)
 
 # About changing
 
