@@ -1,15 +1,11 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Update by : https://github.com/cppla/ServerStatus
-# 依赖于psutil跨平台库：
-# 支持Python版本：2.6 to 3.5 (users of Python 2.4 and 2.5 may use 2.1.3 version)
-# 支持操作系统： Linux, Windows, OSX, Sun Solaris, FreeBSD, OpenBSD and NetBSD, both 32-bit and 64-bit architectures
-# 时间： 20180312
 
 SERVER = "127.0.0.1"
 PORT = 35601
-USER = "s01"
-PASSWORD = "USER_DEFAULT_PASSWORD"
-INTERVAL = 1 # 更新间隔
+USER = "Username"
+PASSWORD = "Password"
+INTERVAL = 1
 
 
 import socket
