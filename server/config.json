@@ -1,37 +1,30 @@
-{"servers":
+{
+	"servers":
 	[
 		{
-			"username": "s01",
+			"username": "node1",
 			"name": "node1",
-			"type": "xen",
+			"type": "node1",
 			"host": "host1",
-			"location": "cn",
-			"password": "USER_DEFAULT_PASSWORD"
+			"location": "node1",
+			"password": "node1"
 		},
 		{
-			"username": "s02",
+			"username": "node2",
 			"name": "node2",
-			"type": "vmware",
+			"type": "node2",
 			"host": "host2",
-			"location": "jp",
-			"password": "USER_DEFAULT_PASSWORD"
+			"location": "node2",
+			"password": "node2"
 		},
 		{
 			"disabled": true,
-			"username": "s03",
+			"username": "node3",
 			"name": "node3",
-			"type": "Nothing",
+			"type": "node3",
 			"host": "host3",
-			"location": "fr",
-			"password": "USER_DEFAULT_PASSWORD"
-		},
-		{
-			"username": "s04",
-			"name": "node4",
-			"type": "kvm",
-			"host": "host4",
-			"location": "kr",
-			"password": "USER_DEFAULT_PASSWORD"
+			"location": "node3",
+			"password": "node3"
 		}
 	]
 }
