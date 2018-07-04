@@ -3,7 +3,8 @@ body { font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei",
 .announcement:hover { border-bottom: solid 3px #145A32; transition: 0.3s; }
 .announcement p { display: inline-block;font-size: 15px;margin: 0;line-height: 1;text-indent: 5px; }
 .announcement i { display: inline-block;font-size: 15px;margin: 0;line-height: 1;color: #000; }
-.navbar { min-height: 40px; }
+.navbar { min-height: 50px; }
+.navbar-top { background-color: #4a4a4a !important; border-bottom: 6px solid #145A32; }
 .navbar-brand { color: #FFF !important; padding: 10px; font-size: 20px; }
 .dropdown .dropdown-toggle { padding-bottom: 10px; padding-top: 10px; }
 .dropdown-menu > li > a { color: #FFF !important; background-color: #222222 !important; }
@@ -21,7 +22,7 @@ body { font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei",
 tr.even.expandRow > :hover { background: #2F2F2F !important; }
 tr.odd.expandRow > :hover { background: #000 !important; }
 .expandRow > td { padding: 0 !important; border-top: 0px !important; }
-#cpu, #ram, #hdd, #network { min-width: 55px; max-width: 100px; }
+#cpu, #ram, #hdd 						{ min-width: 55px; }
 
 @media only screen and (max-width: 992px) {
 	#location, tr td:nth-child(5)		{ display:none; visibility:hidden; }
