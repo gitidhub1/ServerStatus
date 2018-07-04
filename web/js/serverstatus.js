@@ -86,11 +86,11 @@ function uptime() {
 				$("#servers").append(
 					"<tr id=\"r" + i + "\" data-toggle=\"collapse\" data-target=\"#rt" + i + "\" class=\"accordion-toggle " + hack + "\">" +
 						"<td id=\"online4\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
-						//"<td id=\"online6\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
+						"<td id=\"online6\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
 						"<td id=\"ip_status\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
 						"<td id=\"name\">Loading...</td>" +
 						"<td id=\"type\">Loading...</td>" +
-						//"<td id=\"host\">Loading...</td>" +
+						"<td id=\"host\">Loading...</td>" +
 						"<td id=\"location\">Loading...</td>" +
 						"<td id=\"uptime\">Loading...</td>" +
 						"<td id=\"load\">Loading...</td>" +
@@ -126,14 +126,14 @@ function uptime() {
 				TableRow.children["online4"].children[0].children[0].innerHTML = "<small>Down</small>";
 			}
 
-			// Online6
-			//if (result.servers[i].online6) {
-			//	TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-success";
-			//	TableRow.children["online6"].children[0].children[0].innerHTML = "<small>Up</small>";
-			//} else {
-			//	TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-danger";
-			//	TableRow.children["online6"].children[0].children[0].innerHTML = "<small>Down</small>";
-			//}
+			 Online6
+			if (result.servers[i].online6) {
+				TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-success";
+				TableRow.children["online6"].children[0].children[0].innerHTML = "<small>Up</small>";
+			} else {
+				TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-danger";
+				TableRow.children["online6"].children[0].children[0].innerHTML = "<small>Down</small>";
+			}
 
 			// Ipstatus
 			if (result.servers[i].ip_status) {
@@ -151,7 +151,7 @@ function uptime() {
 			TableRow.children["type"].innerHTML = result.servers[i].type;
 
 			// Host
-			//TableRow.children["host"].innerHTML = result.servers[i].host;
+			TableRow.children["host"].innerHTML = result.servers[i].host;
 
 			// Location
 			TableRow.children["location"].innerHTML = result.servers[i].location;
