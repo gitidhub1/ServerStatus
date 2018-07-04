@@ -126,7 +126,7 @@ function uptime() {
 				TableRow.children["online4"].children[0].children[0].innerHTML = "<small>Down</small>";
 			}
 
-			 Online6
+		     // Online6
 			if (result.servers[i].online6) {
 				TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-success";
 				TableRow.children["online6"].children[0].children[0].innerHTML = "<small>Up</small>";
