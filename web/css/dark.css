@@ -25,6 +25,7 @@ tr.odd.expandRow > :hover { background: #000 !important; }
 
 @media only screen and (max-width: 992px) {
 	#location, tr td:nth-child(7)		{ display:none; visibility:hidden; }
+    #loss, tr td:nth-child(10)          { display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 720px) {
 	#type, tr td:nth-child(5)			{ display:none; visibility:hidden; }
@@ -47,7 +48,6 @@ tr.odd.expandRow > :hover { background: #000 !important; }
 	#uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
     #load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
     #loss, tr td:nth-child(10)          { display:none; visibility:hidden; }
-	#traffic, tr td:nth-child(11)		{ display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 450px) {
 	body								{ font-size: 10px; }
@@ -60,7 +60,5 @@ tr.odd.expandRow > :hover { background: #000 !important; }
 	#uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
     #load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
     #loss, tr td:nth-child(10)          { display:none; visibility:hidden; }
-	#traffic, tr td:nth-child(11)		{ display:none; visibility:hidden; }
-    #hdd, tr td:nth-child(14)			{ display:none; visibility:hidden; }
-	#cpu, #ram							{ min-width: 25px; max-width: 50px; }
+	#cpu, #ram, #hdd					{ min-width: 25px; max-width: 50px; }
 }
