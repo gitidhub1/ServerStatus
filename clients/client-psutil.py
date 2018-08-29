@@ -52,11 +52,12 @@ def get_custom_msg():
 		open(file_path, 'w').close()
 	try:
 		custom_file = io.open(file_path, "r", encoding="utf-8")
-		custom_file.readlines()    
+		custom_file.readlines()
 		custom_file.seek(0, 0)
 	except:
 		custom_file = io.open(file_path, "r", encoding="gbk")
- 	result = ""
+
+	result = ""  
 	for line in custom_file.readlines():
 	    line = line.strip()
 	    if not len(line):
