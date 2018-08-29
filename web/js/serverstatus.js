@@ -94,13 +94,14 @@ function uptime() {
 						"<td id=\"location\">Loading...</td>" +
 						"<td id=\"uptime\">Loading...</td>" +
 						"<td id=\"load\">Loading...</td>" +
+                        "<td id=\"loss\"><div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
 						"<td id=\"network\">Loading...</td>" +
 						"<td id=\"traffic\">Loading...</td>" +
 						"<td id=\"cpu\"><div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
 						"<td id=\"memory\"><div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
 						"<td id=\"hdd\"><div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
 					"</tr>" +
-					"<tr class=\"expandRow " + hack + "\"><td colspan=\"12\"><div class=\"accordian-body collapse\" id=\"rt" + i + "\">" +
+					"<tr class=\"expandRow " + hack + "\"><td colspan=\"16\"><div class=\"accordian-body collapse\" id=\"rt" + i + "\">" +
 						"<div id=\"expand_mem\">Loading...</div>" +
 						"<div id=\"expand_swap\">Loading...</div>" +
 						"<div id=\"expand_hdd\">Loading...</div>" +
@@ -159,6 +160,9 @@ function uptime() {
 				if (server_status[i]) {
 					TableRow.children["uptime"].innerHTML = "–";
 					TableRow.children["load"].innerHTML = "–";
+					TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-danger";
+					TableRow.children["loss"].children[0].children[0].style.width = "100%";
+					TableRow.children["loss"].children[0].children[0].innerHTML = "<small>Down</small>";
 					TableRow.children["network"].innerHTML = "–";
 					TableRow.children["traffic"].innerHTML = "–";
 					TableRow.children["cpu"].children[0].children[0].className = "progress-bar progress-bar-danger";
@@ -272,11 +276,21 @@ function uptime() {
 				TableRow.children["hdd"].children[0].children[0].innerHTML = HDD + "%";
 				ExpandRow[0].children["expand_hdd"].innerHTML = "Disk: " + bytesToSize(result.servers[i].hdd_used*1024*1024, 2) + " / " + bytesToSize(result.servers[i].hdd_total*1024*1024, 2);
 
+				// loss
+                var PING_10010 = result.servers[i].ping_10010.toFixed(2);
+                var PING_189 = result.servers[i].ping_189.toFixed(2);
+                var PING_10086 = result.servers[i].ping_10086.toFixed(2);
+                if (PING_10010 >= 10.0 || PING_189 >= 10.0 || PING_10086 >= 10.0)
+                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-danger";
+                else
+                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-success";
+                    TableRow.children["loss"].children[0].children[0].innerHTML = PING_10010 + "% | " + PING_189 + "% | " + PING_10086 + "%";
+
 				// Custom
 				if (result.servers[i].custom) {
-					ExpandRow[0].children["expand_custom"].innerHTML = result.servers[i].custom
+					ExpandRow[0].children["expand_custom"].innerHTML = "Cilent message: " + result.servers[i].custom
 				} else {
-					ExpandRow[0].children["expand_custom"].innerHTML = ""
+					ExpandRow[0].children["expand_custom"].innerHTML = "Cilent message: no info."
 				}
 			}
 		};
@@ -300,6 +314,9 @@ function uptime() {
 				TableRow.children["location"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["uptime"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["load"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
+				TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-error";
+				TableRow.children["loss"].children[0].children[0].style.width = "100%";
+				TableRow.children["loss"].children[0].children[0].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["network"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["traffic"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["cpu"].children[0].children[0].className = "progress-bar progress-bar-error";
