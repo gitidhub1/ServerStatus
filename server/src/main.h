@@ -49,6 +49,9 @@ class CMain
 			double m_Load_1;    //1 minutes load average
 			double m_Load_5;    //5 minutes load average
 			double m_Load_15;   //15 minutes load average
+			double m_ping_10010;
+			double m_ping_189;
+			double m_ping_10086;
 			int64_t m_NetworkRx;
 			int64_t m_NetworkTx;
 			int64_t m_NetworkIN;
