@@ -1,4 +1,4 @@
-body { font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; background: #ebebeb url('../img/light.png'); }
+body { font-family:"Roboto", sans-serif; background: #ebebeb url('../img/light.png'); }
 .announcement { color: #777; border-bottom: solid 3px #d0d0d0; background-color: #fff; padding: 10px 10px; text-align: center; transition: 0.3s; }
 .announcement:hover { border-bottom: solid 3px #159e83; transition: 0.3s; }
 .announcement p { display: inline-block;font-size: 15px;margin: 0;line-height: 1;text-indent: 5px; }
@@ -27,7 +27,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 	#type, tr td:nth-child(5)			{ display:none; visibility:hidden; }
     #host, tr td:nth-child(6)			{ display:none; visibility:hidden; }
 	#location, tr td:nth-child(7)		{ display:none; visibility:hidden; }
-    #uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
+    #loss, tr td:nth-child(10)          { display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 600px) {
 	#type, tr td:nth-child(5)			{ display:none; visibility:hidden; }
@@ -35,6 +35,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 	#location, tr td:nth-child(7)		{ display:none; visibility:hidden; }
 	#uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
     #load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
+    #loss, tr td:nth-child(10)          { display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 533px) {
 	#type, tr td:nth-child(5)			{ display:none; visibility:hidden; }
@@ -42,6 +43,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 	#location, tr td:nth-child(7)		{ display:none; visibility:hidden; }
 	#uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
     #load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
+    #loss, tr td:nth-child(10)          { display:none; visibility:hidden; }
 	#traffic, tr td:nth-child(11)		{ display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 450px) {
@@ -53,6 +55,8 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
     #host, tr td:nth-child(6)			{ display:none; visibility:hidden; }
 	#location, tr td:nth-child(7)		{ display:none; visibility:hidden; }
 	#uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
+    #load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
+    #loss, tr td:nth-child(10)          { display:none; visibility:hidden; }
 	#traffic, tr td:nth-child(11)		{ display:none; visibility:hidden; }
     #hdd, tr td:nth-child(14)			{ display:none; visibility:hidden; }
 	#cpu, #ram							{ min-width: 25px; max-width: 50px; }
