@@ -283,7 +283,7 @@ if __name__ == '__main__':
                 NET_IN, NET_OUT = liuliang()
                 Uptime = get_uptime()
                 Load_1, Load_5, Load_15 = os.getloadavg()
-				CustomMsg = get_custom_msg()
+                CustomMsg = get_custom_msg()
                 MemoryTotal, MemoryUsed, SwapTotal, SwapFree = get_memory()
                 HDDTotal, HDDUsed = get_hdd()
                 IP_STATUS = ip_status()
@@ -295,7 +295,7 @@ if __name__ == '__main__':
                 else:
                     timer -= 1*INTERVAL
 
-				array['custom'] = CustomMsg
+                array['custom'] = CustomMsg
                 array['uptime'] = Uptime
                 array['load_1'] = Load_1
                 array['load_5'] = Load_5
@@ -313,8 +313,8 @@ if __name__ == '__main__':
                 array['network_out'] = NET_OUT
                 array['ip_status'] = IP_STATUS
                 array['ping_10010'] = lostRate.get('10010') * 100
-                array['ping_189'] = lostRate.get('189') * 100
                 array['ping_10086'] = lostRate.get('10086') * 100
+                array['ping_189'] = lostRate.get('189') * 100
 
                 s.send("update " + json.dumps(array) + "\n")
         except KeyboardInterrupt:
