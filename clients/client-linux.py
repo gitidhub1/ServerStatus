@@ -16,6 +16,7 @@ import json
 import subprocess
 import collections
 import threading
+import io
 
 def get_uptime():
     f = open('/proc/uptime', 'r')
@@ -49,6 +50,25 @@ def get_hdd():
     used = total.split()[3]
     size = total.split()[2]
     return int(size), int(used)
+
+def get_custom_msg():
+	file_path = "message.txt"
+	if not os.path.exists(file_path):
+		open(file_path, 'w').close()
+	try:
+		custom_file = io.open(file_path, "r", encoding="utf-8")
+		custom_file.readlines()    
+		custom_file.seek(0, 0)
+	except:
+		custom_file = io.open(file_path, "r", encoding="gbk")
+ 	result = ""
+	for line in custom_file.readlines():
+	    line = line.strip()
+	    if not len(line):
+	        continue
+	    result += (line + " ")
+	custom_file.close()
+	return result
 
 def get_time():
     stat_file = file("/proc/stat", "r")
@@ -192,7 +212,7 @@ def get_packetLostRate():
     t2 = threading.Thread(
         target=_ping_thread,
         kwargs={
-            'host': 'www.10086.cn',
+            'host': 'bj.10086.cn',
             'mark': '10086'
         }
     )
@@ -262,6 +282,7 @@ if __name__ == '__main__':
                 NET_IN, NET_OUT = liuliang()
                 Uptime = get_uptime()
                 Load_1, Load_5, Load_15 = os.getloadavg()
+				CustomMsg = get_custom_msg()
                 MemoryTotal, MemoryUsed, SwapTotal, SwapFree = get_memory()
                 HDDTotal, HDDUsed = get_hdd()
                 IP_STATUS = ip_status()
@@ -273,6 +294,7 @@ if __name__ == '__main__':
                 else:
                     timer -= 1*INTERVAL
 
+				array['custom'] = CustomMsg
                 array['uptime'] = Uptime
                 array['load_1'] = Load_1
                 array['load_5'] = Load_5

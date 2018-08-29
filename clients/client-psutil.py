@@ -1,17 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Update by : https://github.com/cppla/ServerStatus
-# 依赖于psutil跨平台库：
-# 支持Python版本：2.6 to 3.5 (users of Python 2.4 and 2.5 may use 2.1.3 version)
-# 支持操作系统： Linux, Windows, OSX, Sun Solaris, FreeBSD, OpenBSD and NetBSD, both 32-bit and 64-bit architectures
-# 时间： 20180828
 
 SERVER = "127.0.0.1"
 PORT = 35601
-USER = "s01"
-PASSWORD = "USER_DEFAULT_PASSWORD"
-INTERVAL = 1 # 更新间隔
-
+USER = "username"
+PASSWORD = "passwd"
+INTERVAL = 1
 
 import socket
 import time
@@ -21,6 +15,7 @@ import collections
 import psutil
 import sys
 import threading
+import io
 
 def get_uptime():
     return int(time.time() - psutil.boot_time())
@@ -50,6 +45,25 @@ def get_hdd():
         size += usage.total
         used += usage.used
     return int(size/1024.0/1024.0), int(used/1024.0/1024.0)
+
+def get_custom_msg():
+	file_path = "message.txt"
+	if not os.path.exists(file_path):
+		open(file_path, 'w').close()
+	try:
+		custom_file = io.open(file_path, "r", encoding="utf-8")
+		custom_file.readlines()    
+		custom_file.seek(0, 0)
+	except:
+		custom_file = io.open(file_path, "r", encoding="gbk")
+ 	result = ""
+	for line in custom_file.readlines():
+	    line = line.strip()
+	    if not len(line):
+	        continue
+	    result += (line + " ")
+	custom_file.close()
+	return result
 
 def get_cpu():
     return psutil.cpu_percent(interval=INTERVAL)
@@ -166,7 +180,7 @@ def get_packetLostRate():
     t2 = threading.Thread(
         target=_ping_thread,
         kwargs={
-            'host': 'www.10086.cn',
+            'host': 'bj.10086.cn',
             'mark': '10086'
         }
     )
@@ -236,6 +250,7 @@ if __name__ == '__main__':
                 NET_IN, NET_OUT = liuliang()
                 Uptime = get_uptime()
                 Load_1, Load_5, Load_15 = os.getloadavg() if 'linux' in sys.platform else (0.0, 0.0, 0.0)
+				CustomMsg = get_custom_msg()
                 MemoryTotal, MemoryUsed = get_memory()
                 SwapTotal, SwapUsed = get_swap()
                 HDDTotal, HDDUsed = get_hdd()
@@ -248,6 +263,7 @@ if __name__ == '__main__':
                 else:
                     timer -= 1*INTERVAL
 
+				array['custom'] = CustomMsg
                 array['uptime'] = Uptime
                 array['load_1'] = Load_1
                 array['load_5'] = Load_5
