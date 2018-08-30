@@ -282,7 +282,7 @@ function uptime() {
 
 				// Custom
 				if (result.servers[i].custom) {
-					ExpandRow[0].children["expand_custom"].innerHTML =  "<hr>Client message: " + result.servers[i].custom
+					ExpandRow[0].children["expand_custom"].innerHTML =  "<hr>Client message:<br>" + result.servers[i].custom
 				} else {
 					ExpandRow[0].children["expand_custom"].innerHTML = "<hr>Client message: no info."
 				}
