@@ -51,25 +51,36 @@ def get_hdd():
     size = total.split()[2]
     return int(size), int(used)
 
-def get_custom_msg():
-	file_path = "message.txt"
-	if not os.path.exists(file_path):
-		open(file_path, 'w').close()
-	try:
-		custom_file = io.open(file_path, "r", encoding="utf-8")
-		custom_file.readlines()
-		custom_file.seek(0, 0)
-	except:
-		custom_file = io.open(file_path, "r", encoding="gbk")
+def get_connections():
+    system = platform.linux_distribution()
+    if system[0][:6] == "CentOS":
+        if system[1][0] == "6":
+            tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp |grep '::ffff:' |awk '{print $5}' |awk -F ':' '{print $4}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
+        else:
+            tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp6 |awk '{print $5}' |awk -F ':' '{print $1}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
+    else:
+        tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp6 |awk '{print $5}' |awk -F ':' '{print $1}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
+    return float(tmp_connections)
 
-	result = ""  
-	for line in custom_file.readlines():
-	    line = line.strip()
-	    if not len(line):
-	        continue
-	    result += (line + " ")
-	custom_file.close()
-	return result
+def get_custom_msg():
+    file_path = "message.txt"
+    if not os.path.exists(file_path):
+        open(file_path, 'w').close()
+    try:
+        custom_file = io.open(file_path, "r", encoding="utf-8")
+        custom_file.readlines()
+        custom_file.seek(0, 0)
+    except:
+        custom_file = io.open(file_path, "r", encoding="gbk")
+
+    result = ""  
+    for line in custom_file.readlines():
+        line = line.strip()
+        if not len(line):
+            continue
+        result += (line + " ")
+    custom_file.close()
+    return result
 
 def get_time():
     stat_file = file("/proc/stat", "r")
@@ -78,6 +89,7 @@ def get_time():
     for i in range(len(time_list))  :
         time_list[i] = int(time_list[i])
     return time_list
+
 def delta_time():
     x = get_time()
     time.sleep(INTERVAL)
@@ -85,6 +97,7 @@ def delta_time():
     for i in range(len(x)):
         y[i]-=x[i]
     return y
+
 def get_cpu():
     t = delta_time()
     st = sum(t)
@@ -280,6 +293,7 @@ if __name__ == '__main__':
                 NET_IN, NET_OUT = liuliang()
                 Uptime = get_uptime()
                 Load_1, Load_5, Load_15 = os.getloadavg()
+                Connections = get_connections()
                 CustomMsg = get_custom_msg()
                 MemoryTotal, MemoryUsed, SwapTotal, SwapFree = get_memory()
                 HDDTotal, HDDUsed = get_hdd()
@@ -297,6 +311,7 @@ if __name__ == '__main__':
                 array['load_1'] = Load_1
                 array['load_5'] = Load_5
                 array['load_15'] = Load_15
+                array['connections'] = Connections
                 array['memory_total'] = MemoryTotal
                 array['memory_used'] = MemoryUsed
                 array['swap_total'] = SwapTotal

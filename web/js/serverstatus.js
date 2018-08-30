@@ -94,6 +94,7 @@ function uptime() {
 						"<td id=\"location\">Loading...</td>" +
 						"<td id=\"uptime\">Loading...</td>" +
 						"<td id=\"load\">Loading...</td>" +
+						"<td id=\"connections\">Loading...</td>" +
 						"<td id=\"loss\">Loading...</td>" +
 						"<td id=\"network\">Loading...</td>" +
 						"<td id=\"traffic\">Loading...</td>" +
@@ -160,6 +161,7 @@ function uptime() {
 				if (server_status[i]) {
 					TableRow.children["uptime"].innerHTML = "–";
 					TableRow.children["load"].innerHTML = "–";
+					TableRow.children["connections"].innerHTML = "–";
 					TableRow.children["loss"].innerHTML = "–";
 					TableRow.children["network"].innerHTML = "–";
 					TableRow.children["traffic"].innerHTML = "–";
@@ -191,13 +193,20 @@ function uptime() {
 				if(result.servers[i].load == -1) {
 					TableRow.children["load"].innerHTML = "–";
 				} else {
-				    var loadstr = ""
-				    loadstr += result.servers[i].load_1.toFixed(2);
-				    loadstr += " | "
-				    loadstr += result.servers[i].load_5.toFixed(2);
-				    loadstr += " | "
-				    loadstr += result.servers[i].load_15.toFixed(2);
+					var loadstr = ""
+					loadstr += result.servers[i].load_1.toFixed(2);
+					loadstr += " | "
+					loadstr += result.servers[i].load_5.toFixed(2);
+					loadstr += " | "
+					loadstr += result.servers[i].load_15.toFixed(2);
 					TableRow.children["load"].innerHTML = loadstr
+				}
+
+				// Connections
+				if(result.servers[i].connections == -1) {
+					TableRow.children["connections"].innerHTML = "–";
+				} else {
+					TableRow.children["connections"].innerHTML = result.servers[i].connections;
 				}
 
 				// Network
@@ -274,15 +283,15 @@ function uptime() {
 				TableRow.children["hdd"].children[0].children[0].innerHTML = HDD + "%";
 				ExpandRow[0].children["expand_hdd"].innerHTML = "Disk: " + bytesToSize(result.servers[i].hdd_used*1024*1024, 2) + " / " + bytesToSize(result.servers[i].hdd_total*1024*1024, 2);
 
-                // loss
-                var PING_10010 = result.servers[i].ping_10010.toFixed(2);
-                var PING_189 = result.servers[i].ping_189.toFixed(2);
-                var PING_10086 = result.servers[i].ping_10086.toFixed(2);
+				// loss
+				var PING_10010 = result.servers[i].ping_10010.toFixed(2);
+				var PING_189 = result.servers[i].ping_189.toFixed(2);
+				var PING_10086 = result.servers[i].ping_10086.toFixed(2);
 				TableRow.children["loss"].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%";
 
 				// Custom
 				if (result.servers[i].custom) {
-					ExpandRow[0].children["expand_custom"].innerHTML =  "<hr>Client message:<br>" + result.servers[i].custom
+					ExpandRow[0].children["expand_custom"].innerHTML = "<hr>Client message:<br>" + result.servers[i].custom
 				} else {
 					ExpandRow[0].children["expand_custom"].innerHTML = "<hr>Client message: no info."
 				}
@@ -308,6 +317,7 @@ function uptime() {
 				TableRow.children["location"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["uptime"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["load"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
+				TableRow.children["connections"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["loss"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["network"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["traffic"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
