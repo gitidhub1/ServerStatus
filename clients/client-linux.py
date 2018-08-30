@@ -17,6 +17,7 @@ import subprocess
 import collections
 import threading
 import io
+import platform
 
 def get_uptime():
     f = open('/proc/uptime', 'r')
@@ -55,11 +56,11 @@ def get_connections():
     system = platform.linux_distribution()
     if system[0][:6] == "CentOS":
         if system[1][0] == "6":
-            tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp |grep '::ffff:' |awk '{print $5}' |awk -F ':' '{print $4}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
+            tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp |awk '{print $5}' |awk -F ':' '{print $4}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
         else:
-            tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp6 |awk '{print $5}' |awk -F ':' '{print $1}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
+            tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp |awk '{print $5}' |awk -F ':' '{print $1}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
     else:
-        tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp6 |awk '{print $5}' |awk -F ':' '{print $1}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
+        tmp_connections = os.popen("netstat -anp |grep ESTABLISHED |grep tcp |awk '{print $5}' |awk -F ':' '{print $1}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l").read()
     return float(tmp_connections)
 
 def get_custom_msg():
