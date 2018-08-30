@@ -191,10 +191,7 @@ def _ping_thread(host, mark):
         if 'ttl' not in buffer:
             lostCount += 1
         allCount += 1
-        # 防止吓人
-        if allCount < 100:
-            lostRate[mark] = 0.00
-        else:
+        if allCount > 100:
             lostRate[mark] = float(lostCount) / allCount
         endTime = time.time()
         if endTime-startTime > 3600:
@@ -244,6 +241,7 @@ if __name__ == '__main__':
         elif 'INTERVAL' in argc:
             INTERVAL = int(argc.split('INTERVAL=')[-1])
     socket.setdefaulttimeout(30)
+	get_packetLostRate()
     while 1:
         try:
             print("Connecting...")
@@ -276,7 +274,6 @@ if __name__ == '__main__':
 
             traffic = Traffic()
             traffic.get()
-            get_packetLostRate()
             while 1:
                 CPU = get_cpu()
                 NetRx, NetTx = traffic.get()
