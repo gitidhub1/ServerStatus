@@ -21,7 +21,7 @@ body { font-family:"Roboto", sans-serif; background: #222 url('../img/dark.png')
 tr.even.expandRow > :hover { background: #2F2F2F !important; }
 tr.odd.expandRow > :hover { background: #000 !important; }
 .expandRow > td { padding: 0 !important; border-top: 0px !important; }
-#cpu, #memory, #hdd 						{ min-width: 50px; }
+#cpu, #memory, #hdd 					{ min-width: 50px; }
 
 @media only screen and (max-width: 1050px) {
 	#connections, tr td:nth-child(10)	{ display:none; visibility:hidden; }
@@ -63,7 +63,8 @@ tr.odd.expandRow > :hover { background: #000 !important; }
 }
 @media only screen and (max-width: 450px) {
 	body								{ font-size: 10px; }
-	.content 							{ padding: 0; }
+	.content 							{ width:100%; padding: 0; }
+	.announcement						{ width:100%; }
 	#status4, tr td:nth-child(1)		{ display:none; visibility:hidden; }
 	#status6, tr td:nth-child(2)		{ display:none; visibility:hidden; }
 	#name, tr td:nth-child(4)			{ min-width: 20px; max-width: 60px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
