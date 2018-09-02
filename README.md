@@ -4,7 +4,7 @@ ServerStatus is a full rewrite of [mojeda's](https://github.com/mojeda) [ServerS
 
 ### Based on:
 * [BotoX-ServerStatus](https://github.com/BotoX/ServerStatus)
-* [cppla-ServerStatus](https://github.com/cppla/ServerStatus)
+* [cppla-ServerStatus](https://github.com/cppla/ServerStatus) \[**MIT License**\]
 * [ToyoDAdoubi-ServerStatus](https://github.com/ToyoDAdoubi/ServerStatus-Toyo)
 
 # About changing
