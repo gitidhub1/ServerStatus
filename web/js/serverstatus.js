@@ -95,7 +95,7 @@ function uptime() {
 						"<td id=\"uptime\">Loading...</td>" +
 						"<td id=\"load\">Loading...</td>" +
 						"<td id=\"connections\">Loading...</td>" +
-						"<td id=\"loss\">Loading...</td>" +
+						"<td id=\"loss\"><div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
 						"<td id=\"network\">Loading...</td>" +
 						"<td id=\"traffic\">Loading...</td>" +
 						"<td id=\"cpu\"><div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
@@ -162,7 +162,9 @@ function uptime() {
 					TableRow.children["uptime"].innerHTML = "–";
 					TableRow.children["load"].innerHTML = "–";
 					TableRow.children["connections"].innerHTML = "–";
-					TableRow.children["loss"].innerHTML = "–";
+					TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-danger";
+					TableRow.children["loss"].children[0].children[0].style.width = "100%";
+					TableRow.children["loss"].children[0].children[0].innerHTML = "<small>Down</small>";
 					TableRow.children["network"].innerHTML = "–";
 					TableRow.children["traffic"].innerHTML = "–";
 					TableRow.children["cpu"].children[0].children[0].className = "progress-bar progress-bar-danger";
@@ -287,7 +289,13 @@ function uptime() {
 				var PING_10010 = result.servers[i].ping_10010.toFixed(2);
 				var PING_189 = result.servers[i].ping_189.toFixed(2);
 				var PING_10086 = result.servers[i].ping_10086.toFixed(2);
-				TableRow.children["loss"].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%";
+				if (PING_10010 >= 10.0 || PING_189 >= 10.0 || PING_10086 >= 10.0)
+                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-warning";
+				else if (PING_10010 >= 30.0 || PING_189 >= 30.0 || PING_10086 >= 30.0)
+                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-danger";
+                else
+                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-success";
+				TableRow.children["loss"].children[0].children[0].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%" ;
 
 				// Custom
 				if (result.servers[i].custom) {
