@@ -289,10 +289,10 @@ function uptime() {
 				var PING_10010 = result.servers[i].ping_10010.toFixed(2);
 				var PING_189 = result.servers[i].ping_189.toFixed(2);
 				var PING_10086 = result.servers[i].ping_10086.toFixed(2);
-				if (PING_10010 >= 10.0 || PING_189 >= 10.0 || PING_10086 >= 10.0)
-                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-warning";
-				else if (PING_10010 >= 30.0 || PING_189 >= 30.0 || PING_10086 >= 30.0)
+				if (PING_10010 >= 30.0 || PING_189 >= 30.0 || PING_10086 >= 30.0)
                     TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-danger";
+				else if (PING_10010 >= 10.0 || PING_189 >= 10.0 || PING_10086 >= 10.0)
+                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-warning";
                 else
                     TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-success";
 				TableRow.children["loss"].children[0].children[0].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%" ;
