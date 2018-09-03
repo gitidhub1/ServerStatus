@@ -139,58 +139,63 @@ def get_network(ip_version):
         HOST = "ipv6.google.com"
     try:
         s = socket.create_connection((HOST, 80), 2)
+        s.close()
         return True
     except:
-        pass
-    return False
+        return False
 
 lostRate = {
     '10010': 0.0,
     '189': 0.0,
     '10086': 0.0
 }
-def _ping_thread(host, mark):
-    output = os.popen('ping -O %s &' % host if 'linux' in sys.platform else 'ping %s -t &' % host)
-    lostCount = 0
-    allCount = 0
+
+def _ping_thread(host, mark, port):
+    lostPacket = 0
+    allPacket = 0
     startTime = time.time()
-    output.readline()
-    output.readline()
     while True:
-        buffer = output.readline()
-        if len(buffer) == 0:
-            return
-        if 'TTL' not in buffer.upper():
-            lostCount += 1
-        allCount += 1
-        if allCount > 100:
-            lostRate[mark] = float(lostCount) / allCount
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(1)
+        try:
+            s.connect((host, port))
+        except:
+            lostPacket += 1
+        finally:
+            allPacket += 1
+        s.close()
+         if allPacket > 100:
+            lostRate[mark] = float(lostPacket) / allPacket
         endTime = time.time()
-        if endTime-startTime > 3600:
-            lostCount = 0
-            allCount = 0
+        if endTime - startTime > 3600:
+            lostPacket = 0
+            allPacket = 0
             startTime = endTime
+        time.sleep(1)
 
 def get_packetLostRate():
     t1 = threading.Thread(
         target=_ping_thread,
         kwargs={
             'host': 'www.10010.com',
-            'mark': '10010'
+            'mark': '10010',
+            'port': 443
         }
     )
     t2 = threading.Thread(
         target=_ping_thread,
         kwargs={
             'host': 'bj.10086.cn',
-            'mark': '10086'
+            'mark': '10086',
+            'port': 443
         }
     )
     t3 = threading.Thread(
         target=_ping_thread,
         kwargs={
             'host': 'www.189.cn',
-            'mark': '189'
+            'mark': '189',
+            'port': 443
         }
     )
     t1.setDaemon(True)
