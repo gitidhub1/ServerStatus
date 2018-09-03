@@ -20,7 +20,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 .expandRow > td { padding: 0 !important; border-top: 0px !important; }
 #cpu, #memory, #hdd 					{ min-width: 50px; }
 
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1065px) {
 	#connections, tr td:nth-child(10)	{ display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 992px) {
