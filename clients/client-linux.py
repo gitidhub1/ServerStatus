@@ -200,7 +200,7 @@ def _ping_thread(host, mark, port):
         finally:
             allPacket += 1
         s.close()
-         if allPacket > 100:
+        if allPacket > 100:
             lostRate[mark] = float(lostPacket) / allPacket
         endTime = time.time()
         if endTime - startTime > 3600:
