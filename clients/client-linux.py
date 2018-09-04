@@ -221,7 +221,7 @@ def get_packetLostRate():
     t2 = threading.Thread(
         target=_ping_thread,
         kwargs={
-            'host': 'bj.10086.cn',
+            'host': 'www.10086.cn',
             'mark': '10086',
             'port': 443
         }
